@@ -1,0 +1,228 @@
+tags:
+  - name: users
+    description: users API
+  - name: auth
+    description: auth API
+
+paths:
+  # [GET] users
+  /users/me:
+    get:
+      tags:
+        - users
+      summary: Get Current User
+      parameters:
+        - name: Authorization
+          in: header
+          description: Bearer Token
+          required: true
+      responses:
+        200:
+          description: "OK"
+        401:
+          description: "Unauthorized"
+        404:
+          description: "Not Found"
+        500:
+          description: "Server Error"
+
+  # [PUT] users
+  /users:
+    put:
+      tags:
+        - users
+      summary: Update Current User
+      parameters:
+        - name: Authorization
+          in: header
+          description: Bearer Token
+          required: true
+        - name: body
+          in: body
+          description: user Data
+          required: true
+          schema:
+            $ref: "#/definitions/users"
+      responses:
+        204:
+          description: "No Content"
+        400:
+          description: "Bad Request"
+        401:
+          description: "Unauthorized"
+        404:
+          description: "Not Found"
+        409:
+          description: "Conflict"
+        500:
+          description: "Server Error"
+
+    # [DELETE] users/id
+    delete:
+      tags:
+        - users
+      summary: Delete Current User
+      parameters:
+        - name: Authorization
+          in: header
+          description: Bearer Token
+          required: true
+      responses:
+        200:
+          description: "OK"
+        500:
+          description: "Server Error"
+
+  # [POST] auth/sign-in
+  /auth/sign-in:
+    post:
+      consumes:
+        - application/json
+
+      tags:
+        - auth
+      summary: Sign In User
+      requestBody:
+        description: User Credentials
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UserCredentials"
+              type: string
+      responses:
+        200:
+          description: "OK"
+        400:
+          description: "Bad Request"
+        401:
+          description: "Unauthorized"
+        500:
+          description: "Server Error"
+
+  # [POST] auth/sign-up
+  /auth/sign-up:
+    post:
+      tags:
+        - auth
+      summary: Sign Up User
+      requestBody:
+        description: User Data
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/definitions/users"
+      responses:
+        201:
+          description: "Created"
+        400:
+          description: "Bad Request"
+        409:
+          description: "Conflict"
+        500:
+          description: "Server Error"
+
+  # [POST] auth/refresh-token
+  /auth/refresh-token:
+    post:
+      tags:
+        - auth
+      summary: Refresh Access Token
+      parameters:
+        - name: refreshToken
+          in: body
+          description: Refresh Token
+          required: true
+          schema:
+            type: object
+            required:
+              - refreshToken
+            properties:
+              refreshToken:
+                type: string
+                description: Refresh Token
+      responses:
+        200:
+          description: "OK"
+        400:
+          description: "Bad Request"
+        401:
+          description: "Unauthorized"
+        500:
+          description: "Server Error"
+
+# definitions
+definitions:
+  users:
+    type: object
+    required:
+      - email
+      - password
+      - name
+    properties:
+      email:
+        type: string
+        description: user Email
+      password:
+        type: string
+        description: user Password
+      name:
+        type: string
+        description: user Name
+
+schemes:
+  - https
+  - http
+
+components:
+  schemas:
+    UpdateUserRequest:
+      type: object
+      properties:
+        email:
+          type: string
+          description: user Email
+        password:
+          type: string
+          description: user Password
+        name:
+          type: string
+          description: user Name
+    CreateUserRequest:
+      type: object
+      required:
+        - email
+        - password
+        - name
+      properties:
+        email:
+          type: string
+          description: user Email
+        password:
+          type: string
+          description: user Password
+        name:
+          type: string
+          description: user Name
+    UserCredentials:
+      type: object
+      required:
+        - email
+        - password
+      properties:
+        email:
+          type: string
+          description: user Email
+        password:
+          type: string
+          description: user Password
+    RefreshTokenRequest:
+      type: object
+      required:
+        - refreshToken
+      properties:
+        refreshToken:
+          type: string
+          description: Refresh Token
+
