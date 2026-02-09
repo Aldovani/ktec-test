@@ -5,7 +5,6 @@ import type { AppConfig } from "@shared/config/app-config.js";
 import cors from "cors";
 import express from "express";
 import { connect, disconnect } from "mongoose";
-import { version } from "node:os";
 import swaggerJSDoc from "swagger-jsdoc";
 import swaggerUi from "swagger-ui-express";
 import { inject, injectable } from "tsyringe";
@@ -54,6 +53,8 @@ class App {
   }
 
   private async connectToDatabase() {
+    console.log("Connecting to MongoDB...");
+    console.log(`MongoDB URI: ${this.appConfig.database.mongoUri}`);
     await connect(this.appConfig.database.mongoUri);
   }
 

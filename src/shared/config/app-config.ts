@@ -1,7 +1,6 @@
 import { injectable } from "tsyringe";
 import { env } from "./env.js";
 
-
 @injectable()
 export class AppConfig {
   readonly application: AppConfig.Application;

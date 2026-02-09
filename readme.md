@@ -69,14 +69,13 @@ API at `http://localhost:8080`. Swagger docs (when enabled): `http://localhost:8
 
 ## Scripts
 
-| Command             | Description                |
-| ------------------- | -------------------------- |
-| `npm run dev`       | Dev server with hot reload |
-| `npm run build`     | Production build           |
-| `npm run start`     | Run production build       |
-| `npm run test`      | Tests unitaires            |
-| `npm run test:e2e`  | End-to-end tests           |
-| `npm run typecheck` | Type check                 |
+| Command            | Description                |
+| ------------------ | -------------------------- |
+| `npm run dev`      | Dev server with hot reload |
+| `npm run build`    | Production build           |
+| `npm run start`    | Run production build       |
+| `npm run test`     | Tests unit                 |
+| `npm run test:e2e` | End-to-end tests           |
 
 ## Recurring transactions (cron)
 
@@ -92,23 +91,23 @@ npm run cron:process-recurrences
 ```
 src/
 ├── app.ts              # Express app
-├── bootstrap.ts            # Entry point
-├── application/            # API modules (auth, users)
-│    ├─ contracts/           # DTOs, interfaces, etc.
-│    ├─ controller/           # Express controllers
-│    ├─ entities/           # Domain entities (e.g. User)
-│    ├─ errors/           # Custom error classes
-│    ├─ services/           # Application services (business logic)
-│    ├─ use-cases/           # Use case implementations (e.g. RegisterUserUseCase)
-
-│   infra/
-│    ├── http/             # Express routes & middleware
-│    ├── database/           # MongoDB (repositories, models, etc.)
+├── bootstrap.ts        # Entry point
+├── application/        # API modules (auth, users)
+│    ├─ contracts/      # DTOs, interfaces, etc.
+│    ├─ controller/     # Express controllers
+│    ├─ entities/       # Domain entities (e.g. User)
+│    ├─ errors/         # Custom error classes
+│    ├─ services/       # Application services (business logic)
+│    ├─ use-cases/      # Use case implementations (e.g. RegisterUserUseCase)
 │
-├── kernel/               # Core domain logic (services, entities, value objects)
+├── infra/
+│    ├── http/          # Express routes & middleware
+│    ├── database/      # MongoDB (repositories, models, etc.)
+│
+├── kernel/              # Core domain logic (services, entities, value objects)
 ├── shared/
-│   ├── config/         # env, Firebase
-│   ├── types/         # TypeScript types
+│   ├── config/          # env, Firebase
+│   ├── types/           # TypeScript types
 ├── utils/               # General utilities
 │
 │tests/
@@ -117,7 +116,3 @@ src/
 ├── setup.ts             # Test setup (e.g. test database)
 
 ```
-
-## License
-
-MIT
