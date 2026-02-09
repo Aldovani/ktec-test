@@ -6,7 +6,7 @@ This is a backend API for a technical test. It provides endpoints for user authe
 
 ## Tech stack
 
-- **Node.js** 20+
+- **Node.js** 22+
 - **Express** – REST API
 - **mongoDB** – database
 - **Mongoose** – ORM
@@ -17,7 +17,7 @@ This is a backend API for a technical test. It provides endpoints for user authe
 
 ### Prerequisites
 
-- Node.js 20+
+- Node.js 22+
 - mongoDB
 - git
 
