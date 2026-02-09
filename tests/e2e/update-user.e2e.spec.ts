@@ -5,13 +5,13 @@ import { faker } from "@faker-js/faker";
 import { UserModel } from "@infra/database/mongo/schemas/user-schema.js";
 import request from "supertest";
 import { container } from "tsyringe";
-import { beforeAll, describe, it } from "vitest";
+import { beforeEach, describe, it } from "vitest";
 import { App } from "../../src/app.js";
 
 const server = container.resolve(App);
 
 describe("Update user test", () => {
-  beforeAll(async () => {
+  beforeEach(async () => {
     await UserModel.deleteMany({});
   });
 
@@ -21,12 +21,11 @@ describe("Update user test", () => {
 
     const user = new User({
       email: faker.internet.email(),
-      password: "Senha1234",
+      password: faker.internet.password(),
       name: faker.internet.username(),
     });
 
     await userRepository.create(user);
-
     const token = jwtService.sign({ userId: user.id });
 
     await request(server.getServer())
@@ -34,7 +33,6 @@ describe("Update user test", () => {
       .set("Authorization", `Bearer ${token}`)
       .send({
         email: "newemail@example.com",
-        password: "NovaSenha1234",
       })
       .expect(204);
   });

@@ -20,7 +20,7 @@ describe("DeleteUserUseCase", () => {
       password: "password123",
     });
 
-    inMemoryUserRepository.create(user);
+    await inMemoryUserRepository.create(user);
 
     const input = {
       userId: user.id,
@@ -28,6 +28,6 @@ describe("DeleteUserUseCase", () => {
 
     await sut.execute(input);
 
-    expect(inMemoryUserRepository.findById(user.id)).resolves.toBeNull();
+    expect(await inMemoryUserRepository.findById(user.id)).toBeNull();
   });
 });

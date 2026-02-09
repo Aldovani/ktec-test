@@ -1,28 +1,18 @@
 {
-  "$schema": "https://www.schemastore.org/tsconfig",
-  "_version": "24.0.0",
-  "exclude": [
-    "node_modules",
-    "tests"
-  ],
   "compilerOptions": {
-    "outDir": ".dist/",
-    "lib": [
-      "es2024",
-      "ESNext.Array",
-      "ESNext.Collection",
-      "ESNext.Error",
-      "ESNext.Iterator",
-      "ESNext.Promise"
-    ],
+    "outDir": "./dist",
     "module": "nodenext",
-    "target": "es2024",
-    "strict": true,
-    "esModuleInterop": true,
-    "skipLibCheck": true,
-    "moduleResolution": "node16",
+    "target": "es2020",
+    "types": [
+      "node",
+      "vitest"
+    ],
+    "sourceMap": true,
+    "declaration": true,
+    "declarationMap": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
+    "baseUrl": ".",
     "paths": {
       "@kernel/*": [
         "./src/kernel/*"
@@ -39,6 +29,15 @@
       "@tests/*": [
         "./tests/*"
       ]
-    }
+    },
+    "noUncheckedIndexedAccess": true,
+    "exactOptionalPropertyTypes": true,
+    "strict": true,
+    "jsx": "react-jsx",
+    "verbatimModuleSyntax": true,
+    "isolatedModules": true,
+    "noUncheckedSideEffectImports": true,
+    "moduleDetection": "force",
+    "skipLibCheck": true
   }
 }

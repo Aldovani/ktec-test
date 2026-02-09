@@ -1,5 +1,4 @@
 import { User } from "@app/entities/user.js";
-import { ResourceNotFound } from "@app/errors/application/resource-not-found.js";
 import { BcryptEncryptionService } from "@app/services/encryption-service.js";
 import { beforeEach, describe, expect, it } from "vitest";
 import { InMemoryUserRepository } from "../../../../tests/repositories/in-memory-user-repository.js";
@@ -24,7 +23,7 @@ describe("UpdateUserUseCase", () => {
       createdAt: new Date(),
     });
 
-    inMemoryUserRepository.create(user);
+    await inMemoryUserRepository.create(user);
 
     const input = {
       userId: user.id,
@@ -34,7 +33,7 @@ describe("UpdateUserUseCase", () => {
 
     await sut.execute(input);
 
-    expect(inMemoryUserRepository.findById(user.id)).resolves.toEqual(
+    expect(await inMemoryUserRepository.findById(user.id)).toEqual(
       expect.objectContaining({
         id: user.id,
         name: "Changed Name",

@@ -1,13 +1,12 @@
 import type { IUserRepository } from "@app/contracts/repositories/user-repository.js";
-import type { IEncryptionService } from "@app/contracts/services/encryption-service.js";
+import type { IJWTService } from "@app/contracts/services/jwt-service.js";
 import { User } from "@app/entities/user.js";
 import { faker } from "@faker-js/faker";
-import { UserModel } from "@infra/database/mongo/schemas/user-schema.js";
 import request from "supertest";
 import { container } from "tsyringe";
-import { afterAll, beforeAll, describe, expect, it } from "vitest";
+import { beforeAll, describe, expect, it } from "vitest";
 import { App } from "../../src/app.js";
-import type { IJWTService } from "@app/contracts/services/jwt-service.js";
+import { UserModel } from "@infra/database/mongo/schemas/user-schema.js";
 
 const server = container.resolve(App);
 
@@ -24,7 +23,7 @@ describe("Refresh token e2e test", () => {
       email: faker.internet.email(),
       password: "Senha1234",
       name: faker.internet.username(),
-    })
+    });
 
     await userRepository.create(user);
 
