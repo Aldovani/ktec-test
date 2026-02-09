@@ -111,7 +111,6 @@ src/
 ├── utils/               # General utilities
 │
 │tests/
-├── unit/                # Unit tests
 ├── e2e/                 # End-to-end tests
 ├── setup.ts             # Test setup (e.g. test database)
 
